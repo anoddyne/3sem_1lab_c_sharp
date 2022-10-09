@@ -19,11 +19,11 @@ namespace _3sem_1lab_c_sharp
             Console.WriteLine("Задание 1\n");
 
             Console.Write("Введите значение аргумента: ");
-            x = double.Parse(Console.ReadLine());
+            x = Convert.ToDouble(Console.ReadLine());
 
             Console.Write("Задайте число слагаемых: ");
-            n = int.Parse(Console.ReadLine());
-            
+            n = Convert.ToInt32(Console.ReadLine());
+
             //вычисление точного значения функции
             func = Math.Sinh(x);
             Console.WriteLine("\nТочное значение функции равно: " + func);
@@ -59,10 +59,10 @@ namespace _3sem_1lab_c_sharp
             Console.WriteLine("\n" + "\n" + "Задание 2\n");
 
             Console.Write("Введите значение аргумента: ");
-            x = double.Parse(Console.ReadLine());
+            x = Convert.ToDouble(Console.ReadLine());
 
             Console.Write("Задайте точность вычислений: ");
-            e = double.Parse(Console.ReadLine());
+            e = Convert.ToDouble(Console.ReadLine());
 
             func = Math.Sinh(x);
             Console.WriteLine("\nТочное значение функции равно: " + func);
