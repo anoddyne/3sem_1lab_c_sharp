@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace _3sem_1lab_c_sharp
 {
     internal class Program
@@ -13,15 +12,24 @@ namespace _3sem_1lab_c_sharp
         static void Main(string[] args)
         {
             Console.WriteLine("Вычисление значений функции sinh(x):");
-            double x, func, sum = 0, last = 0, r, e; int n;
+            double x, func, sum, last = 0, r, e; 
+            int n;
+
             Console.WriteLine("Задание 1\n");
+
             Console.Write("Введите значение аргумента: ");
             x = double.Parse(Console.ReadLine());
+
             Console.Write("Задайте число слагаемых: ");
             n = int.Parse(Console.ReadLine());
+            
+            //вычисление точного значения функции
             func = Math.Sinh(x);
+
             Console.WriteLine("\nТочное значение функции равно: " + func);
 
+            //цикл, который вычисляет частичную сумму ряда
+            //присваиваем сумме ряда и временной переменной r, которая считает слагаемую дробь в каждом проходе, значение x, так как оно пропускается в цикле
             sum = x;
             r = x;
             for (int i = 1; i < n; i++)
@@ -32,6 +40,7 @@ namespace _3sem_1lab_c_sharp
             }
             Console.WriteLine("Частичная сумма ряда равна: " + sum);
 
+            //вычисление абсолютного значения погрешности между точным значением функции и частичной суммой ряда
             double pogreshnost = Math.Abs(func - sum);
             Console.WriteLine("Абсолютная погрешность равна: " + pogreshnost + "\n");
             if (pogreshnost > last)
@@ -42,38 +51,46 @@ namespace _3sem_1lab_c_sharp
             else
             {
                 Console.WriteLine("Последнее слагаемое больше чем погрешность.");
-                Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last + "\n");
+                Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last);
             }
 
-            Console.WriteLine("Задание 2\n");
+            Console.WriteLine("\n" + "\n" + "Задание 2\n");
+
             Console.Write("Введите значение аргумента: ");
             x = double.Parse(Console.ReadLine());
+
             Console.Write("Задайте точность вычислений: ");
             e = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("\nТочное значение функции равно: " + func);
-
-            last = x;
-            sum = x;
-            for (n = 1; last > e; n++)
+            if (e <= 1 && e >= -1)
             {
-                last *= (x * x) / (2 * n * (2 * n + 1));
-                sum += last; 
-            }
-            Console.WriteLine("Частичная сумма ряда c заданной точностью равна: " + sum);
-            Console.WriteLine("Учтено " + n + " членов ряда");
+                Console.WriteLine("\nТочное значение функции равно: " + func + "\n");
 
-            last = x;
-            sum = x;
-            for (n = 1; last > e/10; n++)
+                last = x;
+                sum = x;
+                for (n = 1; last > e; n++)
+                {
+                    last *= (x * x) / (2 * n * (2 * n + 1));
+                    sum += last;
+                }
+                Console.WriteLine("Частичная сумма ряда c заданной точностью равна: " + sum);
+                Console.WriteLine("Учтено " + n + " членов ряда" + "\n");
+
+                last = x;
+                sum = x;
+                for (n = 1; last > (e / 10); n++)
+                {
+                    last *= (x * x) / (2 * n * (2 * n + 1));
+                    sum += last;
+                }
+                Console.WriteLine("Частичная сумма ряда c точностью, большей в 10 раз, равна " + sum);
+                Console.WriteLine("Учтено " + n + " членов ряда");
+
+                Console.ReadLine();
+            } else
             {
-                last *= (x * x) / (2 * n * (2 * n + 1));
-                sum += last;
+                Console.WriteLine("Введите число E в отрезке от -1 до 1!");
+                Console.ReadLine();
             }
-            Console.WriteLine("Частичная сумма ряда c точностью, большей в 10 раз, равна " + sum);
-            Console.WriteLine("Учтено " + n + " членов ряда");
-
-            Console.ReadLine();
         }
     }
 }
