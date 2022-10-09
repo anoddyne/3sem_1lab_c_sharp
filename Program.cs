@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace _3sem_1lab_c_sharp
 {
     internal class Program
@@ -25,7 +26,6 @@ namespace _3sem_1lab_c_sharp
             
             //вычисление точного значения функции
             func = Math.Sinh(x);
-
             Console.WriteLine("\nТочное значение функции равно: " + func);
 
             //цикл, который вычисляет частичную сумму ряда
@@ -61,10 +61,11 @@ namespace _3sem_1lab_c_sharp
 
             Console.Write("Задайте точность вычислений: ");
             e = double.Parse(Console.ReadLine());
+
+            func = Math.Sinh(x);
+            Console.WriteLine("\nТочное значение функции равно: " + func);
             if (e <= 1 && e >= -1)
             {
-                Console.WriteLine("\nТочное значение функции равно: " + func + "\n");
-
                 last = x;
                 sum = x;
                 for (n = 1; last > e; n++)
