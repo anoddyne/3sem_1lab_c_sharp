@@ -14,7 +14,7 @@ namespace _3sem_1lab_c_sharp
         {
             Console.WriteLine("Вычисление значений функции sinh(x):");
             double x, func, sum, last = 0, r, e; 
-            int n;
+            int n, n_e, n_e10;
 
             Console.WriteLine("Задание 1\n");
 
@@ -43,15 +43,17 @@ namespace _3sem_1lab_c_sharp
             //вычисление абсолютного значения погрешности между точным значением функции и частичной суммой ряда
             double pogreshnost = Math.Abs(func - sum);
             Console.WriteLine("Абсолютная погрешность равна: " + pogreshnost + "\n");
-            if (pogreshnost > last)
+
+            switch (pogreshnost > last)
             {
-                Console.WriteLine("Погрешность больше чем последнее слагаемое.");
-                Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last);
-            }
-            else
-            {
-                Console.WriteLine("Последнее слагаемое больше чем погрешность.");
-                Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last);
+                case true:
+                    Console.WriteLine("Погрешность больше чем последнее слагаемое.");
+                    Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last);
+                    break;
+                case false:
+                    Console.WriteLine("Последнее слагаемое больше чем погрешность.");
+                    Console.WriteLine("Погрешность = " + pogreshnost + "; последнее слагаемое = " + last);
+                    break;
             }
 
             Console.WriteLine("\n" + "\n" + "Задание 2\n");
@@ -68,23 +70,35 @@ namespace _3sem_1lab_c_sharp
             {
                 last = x;
                 sum = x;
-                for (n = 1; last > e; n++)
+                for (n_e = 1; last > e; n_e++)
                 {
-                    last *= (x * x) / (2 * n * (2 * n + 1));
+                    last *= (x * x) / (2 * n_e * (2 * n_e + 1));
                     sum += last;
                 }
                 Console.WriteLine("Частичная сумма ряда c заданной точностью равна: " + sum);
-                Console.WriteLine("Учтено " + n + " членов ряда" + "\n");
+                Console.WriteLine("Учтено " + n_e + " членов ряда" + "\n");
 
                 last = x;
                 sum = x;
-                for (n = 1; last > (e / 10); n++)
+                for (n_e10 = 1; last > (e / 10); n_e10++)
                 {
-                    last *= (x * x) / (2 * n * (2 * n + 1));
+                    last *= (x * x) / (2 * n_e10 * (2 * n_e10 + 1));
                     sum += last;
                 }
                 Console.WriteLine("Частичная сумма ряда c точностью, большей в 10 раз, равна " + sum);
-                Console.WriteLine("Учтено " + n + " членов ряда");
+                Console.WriteLine("Учтено " + n_e10 + " членов ряда");
+
+                if (n_e > n_e10)
+                {
+                    Console.WriteLine("Слагаемых при обычной E больше");
+                }
+                else if (n_e < n_e10)
+                { 
+                    Console.WriteLine("Слагаемых при E/10 больше");
+                } else
+                {
+                    Console.WriteLine("Слагаемых поровну");
+                }
 
                 Console.ReadLine();
             } else
